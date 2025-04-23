@@ -3,28 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saeed Abdul Muizz - Portfolio</title>
+    <title>Saeed Abdul Muizz - Interactive Portfolio</title>
+    <!-- Font Awesome CDN (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* 1. CSS Variables and Base Styles */
         :root {
-            --bg-color-dark: #121212;
+            --bg-color-dark: #1a1a2e; /* Dark blueish background */
             --text-color-dark: #e0e0e0;
-            --card-bg-dark: #1e1e1e;
-            --border-color-dark: #333;
-            --primary-accent-dark: #00aaff; /* Techy blue */
-            --secondary-accent-dark: #444;
+            --card-bg-dark: #162447; /* Darker blue for cards */
+            --border-color-dark: #4a4e69;
+            --primary-accent-dark: #ff6b6b; /* Vibrant Coral */
+            --secondary-accent-dark: #fca311; /* Orange accent */
+            --gradient-start-dark: #1f4068;
+            --gradient-mid-dark: #162447;
+            --gradient-end-dark: #1a1a2e;
 
-            --bg-color-light: #f8f9fa;
-            --text-color-light: #212529;
+
+            --bg-color-light: #f0f8ff; /* Alice blue */
+            --text-color-light: #2c3e50; /* Dark grey-blue */
             --card-bg-light: #ffffff;
-            --border-color-light: #dee2e6;
-            --primary-accent-light: #007bff;
-            --secondary-accent-light: #e9ecef;
+            --border-color-light: #d1d8e0;
+            --primary-accent-light: #fa8231; /* Vibrant Orange */
+            --secondary-accent-light: #4b7bec; /* Royal Blue */
+             --gradient-start-light: #a2ded0;
+            --gradient-mid-light: #f0e68c;
+            --gradient-end-light: #f0f8ff;
 
-            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
             --transition-speed: 0.3s;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
         }
 
+        /* Apply theme variables */
         [data-theme="dark"] {
             --bg-color: var(--bg-color-dark);
             --text-color: var(--text-color-dark);
@@ -32,6 +44,10 @@
             --border-color: var(--border-color-dark);
             --primary-accent: var(--primary-accent-dark);
             --secondary-accent: var(--secondary-accent-dark);
+            --gradient-start: var(--gradient-start-dark);
+            --gradient-mid: var(--gradient-mid-dark);
+            --gradient-end: var(--gradient-end-dark);
+            --shadow-color: var(--shadow-dark);
         }
 
         [data-theme="light"] {
@@ -41,7 +57,12 @@
             --border-color: var(--border-color-light);
             --primary-accent: var(--primary-accent-light);
             --secondary-accent: var(--secondary-accent-light);
+            --gradient-start: var(--gradient-start-light);
+            --gradient-mid: var(--gradient-mid-light);
+            --gradient-end: var(--gradient-end-light);
+            --shadow-color: var(--shadow-light);
         }
+
 
         * {
             margin: 0;
@@ -50,7 +71,7 @@
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
         }
 
         body {
@@ -59,6 +80,14 @@
             color: var(--text-color);
             line-height: 1.7;
             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Keyframes for Gradient Animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* 2. Layout and Containers */
@@ -69,11 +98,13 @@
         }
 
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
             opacity: 0; /* Initially hidden for scroll animation */
-            transform: translateY(30px); /* Start slightly lower */
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(40px); /* Start slightly lower */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, transform; /* Optimize animation */
+             position: relative; /* Needed for potential pseudo-elements */
+             overflow: hidden; /* Clip animations */
         }
 
         section.is-visible {
@@ -81,23 +112,23 @@
             transform: translateY(0);
         }
 
-        /* Header/Nav - Minimal */
+        /* Header/Nav */
         .main-header {
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
-            background-color: rgba(18, 18, 18, 0.8); /* Semi-transparent dark background */
+            background-color: rgba(22, 36, 71, 0.8); /* Darker semi-transparent */
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari */
             z-index: 1000;
             border-bottom: 1px solid var(--border-color);
-             transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
         }
-         [data-theme="light"] .main-header {
-             background-color: rgba(248, 249, 250, 0.8); /* Semi-transparent light background */
-         }
-
+        [data-theme="light"] .main-header {
+            background-color: rgba(255, 255, 255, 0.8); /* Lighter semi-transparent */
+        }
 
         .main-header .container {
             display: flex;
@@ -106,97 +137,108 @@
         }
 
         .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.4rem; /* Slightly larger */
+            font-weight: 700; /* Bolder */
             color: var(--primary-accent);
             text-decoration: none;
+            letter-spacing: 1px;
         }
 
         .theme-toggle-button {
             background: none;
-            border: 1px solid var(--primary-accent);
+            border: 2px solid var(--primary-accent); /* Thicker border */
             color: var(--primary-accent);
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 25px; /* Pill shape */
             font-size: 0.9rem;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-weight: 600;
+            transition: background-color var(--transition-speed), color var(--transition-speed), transform 0.2s ease;
         }
 
         .theme-toggle-button:hover {
             background-color: var(--primary-accent);
             color: var(--bg-color); /* Text color swaps on hover */
+            transform: scale(1.05);
         }
-         /* Adjust button text color for light theme hover */
         [data-theme="light"] .theme-toggle-button:hover {
-             color: var(--text-color-light);
-         }
+             color: #fff; /* Ensure contrast on light theme hover */
+        }
 
 
         /* 3. Typography */
         h1, h2, h3 {
             margin-bottom: 1rem;
             line-height: 1.3;
-            font-weight: 600;
+            font-weight: 700; /* Bolder headings */
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem; /* Larger */
             margin-bottom: 0.5rem;
+            color: var(--text-color); /* Use main text color */
+            transition: color var(--transition-speed) ease;
         }
 
         h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: var(--primary-accent);
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             text-align: center;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+             animation: slideInFromBottom 0.6s ease-out forwards;
+             opacity: 0; /* Start hidden for animation */
         }
-         /* Underline effect for section headers */
+
+        section.is-visible h2 {
+            opacity: 1;
+        }
+
+         /* Fun underline effect for section headers */
         h2::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-accent);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent)); /* Gradient underline */
+            border-radius: 2px;
+             transition: width 0.4s ease;
         }
-
+         h2:hover::after {
+             width: 120px;
+         }
 
         h3 {
-            font-size: 1.5rem;
-             color: var(--text-color); /* Slightly less emphasis than h2 */
-             transition: color var(--transition-speed) ease;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color var(--transition-speed) ease;
         }
-
         p {
             margin-bottom: 1rem;
             color: var(--text-color);
              transition: color var(--transition-speed) ease;
+             opacity: 0.9; /* Slightly less emphasis */
         }
-
         a {
             color: var(--primary-accent);
             text-decoration: none;
-            transition: color var(--transition-speed);
+            font-weight: 500;
+            transition: color var(--transition-speed), filter 0.2s ease;
         }
-
         a:hover {
-            text-decoration: underline;
-            filter: brightness(1.1);
+            filter: brightness(1.2);
+             text-decoration: underline;
+             text-decoration-thickness: 2px;
         }
-
-        ul {
-            list-style: none;
-            padding-left: 0; /* Remove default padding */
-        }
-
-        li {
-            margin-bottom: 0.75rem;
-        }
+        ul { list-style: none; padding-left: 0; }
+        li { margin-bottom: 0.75rem; }
 
         /* 4. Hero Section */
         #hero {
@@ -206,281 +248,596 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 60px; /* Account for fixed header */
+            padding-top: 80px; /* Account for fixed header */
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+             transition: background var(--transition-speed) ease; /* Smooth theme transition */
+             position: relative; /* For potential overlays */
         }
 
         .tagline {
-            font-size: 1.3rem;
+            font-size: 1.5rem; /* Larger tagline */
             color: var(--secondary-accent);
              transition: color var(--transition-speed) ease;
             margin-bottom: 1.5rem;
-            font-weight: 300;
+            font-weight: 500; /* Slightly bolder */
+             min-height: 50px; /* Prevent layout shift from typing */
+        }
+
+        /* Style for the Typed.js cursor */
+        .typed-cursor {
+            color: var(--secondary-accent);
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .hero-intro {
-            max-width: 600px;
-            margin-bottom: 2rem;
-             font-size: 1.1rem;
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+             font-size: 1.15rem;
+             opacity: 0.9;
         }
 
         .social-links {
             display: flex;
-            gap: 1.5rem; /* Spacing between icons */
-             margin-top: 1rem;
-             margin-bottom: 2rem;
+            gap: 2rem; /* More space between icons */
+             margin-top: 1.5rem;
+             margin-bottom: 2.5rem;
         }
-
         .social-links a {
-            font-size: 1.5rem; /* Make icons slightly larger */
+            font-size: 1.8rem; /* Larger icons */
             color: var(--text-color);
-             transition: color var(--transition-speed), transform 0.2s ease;
+             transition: color var(--transition-speed), transform 0.3s ease;
         }
          .social-links a:hover {
              color: var(--primary-accent);
-             transform: scale(1.1);
-             text-decoration: none; /* No underline for icons */
+             transform: translateY(-3px) scale(1.1); /* Lift and scale */
+             text-decoration: none;
          }
-
 
         .cta-button {
             display: inline-block;
-            background-color: var(--primary-accent);
-            color: var(--bg-color); /* Text color contrasts with button */
-            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent)); /* Gradient button */
+            color: #fff; /* White text */
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 30px; /* More rounded */
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color var(--transition-speed), transform 0.2s ease, color var(--transition-speed);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background var(--transition-speed);
         }
-         /* Adjust button text color for light theme */
          [data-theme="light"] .cta-button {
-              color: var(--text-color-light);
+             color: #fff;
          }
 
-
         .cta-button:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 20px var(--shadow-color);
              text-decoration: none;
+             filter: brightness(1.1);
         }
 
         /* 5. About Section */
+        #about .container {
+             display: flex;
+             flex-direction: column; /* Stack elements */
+             align-items: center; /* Center align content */
+             text-align: center;
+         }
+
+        .profile-pic-container {
+             width: 180px;
+             height: 180px;
+             border-radius: 50%; /* Circular picture */
+             overflow: hidden; /* Clip image */
+             margin-bottom: 2rem;
+             border: 5px solid var(--primary-accent); /* Colorful border */
+             box-shadow: 0 0 20px var(--shadow-color);
+             transition: border-color var(--transition-speed) ease;
+              background-color: var(--card-bg); /* Placeholder bg color */
+        }
+
+        .profile-pic-container img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover; /* Ensure image covers the area */
+             display: block;
+         }
+
         #about p {
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center; /* Center align text */
+            max-width: 750px;
             font-size: 1.1rem;
         }
+         #about strong {
+             color: var(--secondary-accent); /* Highlight keywords */
+              transition: color var(--transition-speed) ease;
+         }
+
 
         /* 6. Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            text-align: center;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            text-align: left; /* Align text left in skill cards */
         }
+
+        .skill-category {
+             background-color: var(--card-bg);
+             padding: 2rem 1.5rem;
+             border-radius: 10px;
+             border: 1px solid var(--border-color);
+             box-shadow: 0 5px 15px var(--shadow-color);
+             transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.3s ease;
+        }
+         .skill-category:hover {
+             transform: translateY(-5px);
+         }
 
         .skill-category h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-accent); /* Highlight category titles */
+            margin-bottom: 1.5rem;
+            color: var(--primary-accent);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--secondary-accent);
+            padding-bottom: 0.5rem;
+            display: inline-block; /* Fit border to text */
         }
-        .skill-category ul {
-            padding-left: 0;
-        }
+        .skill-category ul { padding-left: 0; }
 
         .skill-category li {
-             background-color: var(--card-bg);
-             padding: 0.8rem;
-             border-radius: 5px;
-             margin-bottom: 0.75rem;
-             border: 1px solid var(--border-color);
-             transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.2s ease;
+             display: flex; /* Align icon and text */
+             align-items: center;
+             gap: 0.8rem; /* Space between icon and text */
+             margin-bottom: 1rem;
+             font-size: 1.05rem;
+             font-weight: 500;
          }
-         .skill-category li:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-             border-color: var(--primary-accent);
+         .skill-category li i { /* Style icons */
+             font-size: 1.3rem;
+             color: var(--secondary-accent);
+             width: 25px; /* Fixed width for alignment */
+             text-align: center;
+              transition: color var(--transition-speed) ease, transform 0.2s ease;
          }
-
+         .skill-category li:hover i {
+             transform: scale(1.2);
+             color: var(--primary-accent);
+         }
 
         /* 7. Experience Section */
-         #experience ul li {
+         #experience ul > li { /* Style the main experience entry card */
             background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-             border: 1px solid var(--border-color);
-             transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-accent); /* Accent border */
+             border-top: 1px solid var(--border-color); /* Subtle top border */
+             border-right: 1px solid var(--border-color);
+             border-bottom: 1px solid var(--border-color);
+             box-shadow: 0 5px 15px var(--shadow-color);
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.3s ease;
         }
-        #experience h3 {
-             margin-bottom: 0.25rem; /* Reduce space below job title */
-        }
-         .experience-details {
-             margin-top: 0.5rem;
-             padding-left: 1.5rem; /* Indent bullet points */
-         }
-         .experience-details li {
-             list-style-type: disc; /* Use standard bullets */
-             background: none; /* Remove card background from list items */
-             padding: 0.2rem 0;
-             border: none;
-             margin-bottom: 0.5rem;
-             color: var(--text-color); /* Ensure bullets inherit text color */
-             opacity: 0.9;
-             font-size: 0.95rem;
-         }
-         .date {
-             font-style: italic;
-             color: var(--secondary-accent);
-             font-size: 0.9rem;
-             margin-bottom: 1rem;
-             transition: color var(--transition-speed) ease;
+         #experience ul > li:hover {
+             transform: scale(1.02);
          }
 
+        #experience h3 {
+            margin-bottom: 0.25rem;
+            color: var(--primary-accent);
+        }
+        .date {
+            font-style: italic;
+            color: var(--secondary-accent);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: block; /* Ensure it takes its own line */
+            transition: color var(--transition-speed) ease;
+        }
+        .experience-details {
+            margin-top: 1rem;
+            padding-left: 0; /* Reset default padding */
+        }
+        .experience-details li {
+            list-style-type: none; /* Remove default bullets */
+            position: relative;
+            padding-left: 1.5rem; /* Space for custom bullet */
+            margin-bottom: 0.6rem;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        .experience-details li::before { /* Custom bullet */
+            content: '▹'; /* Triangle bullet */
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--secondary-accent);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
 
         /* 8. Projects Section */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .project-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed), border-color var(--transition-speed);
-             display: flex;
-             flex-direction: column; /* Ensure content stacks vertically */
+            border-radius: 10px;
+            overflow: hidden; /* Keep image within borders */
+            box-shadow: 0 5px 20px var(--shadow-color);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+             perspective: 1000px; /* For 3D tilt effect */
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.1); /* Subtle glow with primary color */
+            transform: translateY(-8px) rotateX(5deg) rotateY(-3deg); /* Tilt effect */
+            box-shadow: 0 12px 30px var(--shadow-color);
         }
-         .project-card h3 {
+
+         .project-image-container {
+             height: 200px; /* Fixed height for images */
+             overflow: hidden;
+             background-color: var(--secondary-accent-dark); /* Placeholder bg */
+         }
+          [data-theme="light"] .project-image-container {
+               background-color: var(--secondary-accent-light);
+          }
+
+         .project-image-container img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover; /* Crop/cover image */
+             display: block;
+             transition: transform 0.4s ease;
+         }
+         .project-card:hover .project-image-container img {
+             transform: scale(1.05); /* Zoom image slightly on hover */
+         }
+
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h3 {
             margin-bottom: 0.75rem;
-         }
-         .project-card p {
-             flex-grow: 1; /* Make description take available space */
-             margin-bottom: 1rem;
-             font-size: 0.95rem;
-             opacity: 0.9;
-         }
-
-
-        .project-tags {
-            margin-bottom: 1rem;
-             display: flex;
-             flex-wrap: wrap;
-             gap: 0.5rem;
+            color: var(--primary-accent);
+            font-size: 1.4rem;
         }
-
+        .project-content p {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        .project-tags {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
         .project-tags span {
             background-color: var(--secondary-accent);
-            color: var(--bg-color); /* Contrast tag text */
-            padding: 0.3rem 0.7rem;
-            border-radius: 15px; /* Pill shape */
-            font-size: 0.8rem;
-            font-weight: 500;
-             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            color: var(--bg-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
-          /* Adjust tag text color for light theme */
-         [data-theme="light"] .project-tags span {
-             color: var(--text-color-light);
-         }
-
+        [data-theme="light"] .project-tags span {
+             color: #fff; /* Ensure contrast on light */
+        }
 
         .project-links a {
-             margin-right: 1rem;
-             font-weight: bold;
-             display: inline-block; /* Ensure links behave well */
-             transition: color 0.2s ease;
-         }
-         .project-links a:hover {
-             color: var(--primary-accent);
-             filter: brightness(1.2);
-             text-decoration: none;
-         }
-
+            margin-right: 1rem;
+            font-weight: bold;
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .project-links a i { font-size: 1rem; } /* Icon size */
+        .project-links a:hover {
+            color: var(--secondary-accent);
+            transform: scale(1.05);
+            text-decoration: none;
+        }
 
         /* 9. Education Section */
+         #education ul {
+             max-width: 800px; /* Center the list */
+             margin: 0 auto;
+         }
         #education ul li {
-            border-left: 3px solid var(--primary-accent);
-            padding-left: 1rem;
-            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-accent);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+             position: relative;
+             background: var(--card-bg); /* Add subtle background */
+             padding: 1rem 1rem 1rem 1.5rem;
+             border-radius: 0 8px 8px 0; /* Rounded corners on right */
+             box-shadow: 3px 3px 10px var(--shadow-color);
+             transition: background-color var(--transition-speed) ease;
         }
+                /* === Timeline Styles === */
+                #learning-journey {
+                  position: relative; /* Needed for the line */
+              }
+      
+              .timeline-container {
+                  position: relative;
+                  max-width: 800px; /* Adjust width as needed */
+                  margin: 2rem auto;
+                  padding: 2rem 0;
+              }
+      
+              /* The vertical timeline line */
+              .timeline-container::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  bottom: 0;
+                  left: 50%; /* Center the line */
+                  width: 4px;
+                  background: linear-gradient(180deg, var(--secondary-accent), var(--primary-accent), var(--secondary-accent)); /* Gradient line */
+                  transform: translateX(-50%);
+                  z-index: 1;
+                  border-radius: 2px;
+              }
+      
+              .timeline-item {
+                  position: relative;
+                  margin-bottom: 50px; /* Space between items */
+                  width: 50%; /* Each item takes half the width */
+                  padding: 10px 40px;
+                  box-sizing: border-box;
+      
+                   /* Animation setup */
+                   opacity: 0;
+                   transform: translateY(50px);
+                   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                   transition-delay: var(--delay, 0s); /* Stagger delay */
+              }
+      
+              /* Position items alternately */
+              .timeline-item:nth-child(odd) {
+                  left: 0;
+                   text-align: right; /* Align text right for left items */
+              }
+      
+              .timeline-item:nth-child(even) {
+                  left: 50%; /* Shift even items to the right */
+                   text-align: left;
+              }
+      
+              /* Position the content box arrow */
+              .timeline-content::after {
+                   content: '';
+                   position: absolute;
+                   width: 0;
+                   height: 0;
+                   border-style: solid;
+                   top: 20px;
+               }
+              .timeline-item:nth-child(odd) .timeline-content::after {
+                   right: -15px; /* Arrow pointing right */
+                   border-width: 15px 0 15px 15px;
+                   border-color: transparent transparent transparent var(--card-bg);
+               }
+               .timeline-item:nth-child(even) .timeline-content::after {
+                   left: -15px; /* Arrow pointing left */
+                   border-width: 15px 15px 15px 0;
+                   border-color: transparent var(--card-bg) transparent transparent;
+               }
+      
+      
+               /* The circular marker on the timeline */
+               .timeline-marker {
+                   position: absolute;
+                   width: 50px;
+                   height: 50px;
+                   left: 50%;
+                   top: 0; /* Adjust vertical alignment if needed */
+                   background-color: var(--bg-color); /* Match page background */
+                   border: 4px solid var(--primary-accent);
+                   border-radius: 50%;
+                   z-index: 2; /* Above the line */
+                   transform: translateX(-50%);
+                   display: flex;
+                   align-items: center;
+                   justify-content: center;
+                    transition: border-color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+               }
+                .timeline-marker i {
+                    font-size: 1.5rem;
+                    color: var(--primary-accent);
+                    transition: color var(--transition-speed) ease;
+                }
+                .timeline-item:hover .timeline-marker {
+                    border-color: var(--secondary-accent);
+                }
+                .timeline-item:hover .timeline-marker i {
+                     color: var(--secondary-accent);
+                }
+      
+      
+              .timeline-content {
+                  padding: 1.5rem;
+                  background-color: var(--card-bg);
+                  position: relative;
+                  border-radius: 8px;
+                  box-shadow: 0 5px 15px var(--shadow-color);
+                   transition: background-color var(--transition-speed) ease;
+              }
+      
+              .timeline-content h3 {
+                  margin-top: 0;
+                  margin-bottom: 0.5rem;
+                  color: var(--primary-accent);
+                   font-size: 1.3rem;
+              }
+               .timeline-date {
+                  font-size: 0.85rem;
+                  font-weight: bold;
+                  color: var(--secondary-accent);
+                  margin-bottom: 0.8rem;
+                  display: inline-block; /* Layout control */
+                   text-transform: uppercase;
+                   letter-spacing: 0.5px;
+               }
+      
+              .timeline-content p {
+                   font-size: 0.95rem;
+                   line-height: 1.6;
+                   margin-bottom: 0;
+                   opacity: 0.9;
+               }
+      
+               /* Animation trigger class */
+               .timeline-item.is-visible {
+                   opacity: 1;
+                   transform: translateY(0);
+               }
+      
+              /* Responsive adjustments */
+              @media screen and (max-width: 768px) {
+                  .timeline-container::before {
+                      left: 30px; /* Move line to the left */
+                      transform: translateX(0);
+                  }
+                  .timeline-item {
+                      width: 100%; /* Full width */
+                      padding-left: 70px; /* Space for line and marker */
+                      padding-right: 15px;
+                      left: 0 !important; /* Force all items to the left layout */
+                       text-align: left !important; /* Force text align left */
+                  }
+                  .timeline-marker {
+                      left: 30px; /* Align marker with the line */
+                      transform: translateX(-50%);
+                  }
+                   /* Adjust arrow position for left alignment */
+                  .timeline-content::after {
+                       left: -15px !important;
+                       right: auto !important;
+                       border-width: 15px 15px 15px 0 !important;
+                       border-color: transparent var(--card-bg) transparent transparent !important;
+                   }
+              }
+         #education ul li::before { /* Dot on the timeline */
+            content: '';
+             position: absolute;
+             left: -9px; /* Position over the border */
+             top: 5px;
+             width: 14px;
+             height: 14px;
+             background-color: var(--secondary-accent);
+             border-radius: 50%;
+             border: 3px solid var(--bg-color); /* Match background */
+             transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+         }
+
          #education .institution {
              font-weight: bold;
+             color: var(--text-color);
+             font-size: 1.15rem;
+             transition: color var(--transition-speed) ease;
+         }
+         #education .degree {
+             display: block; /* Ensure degree is on new line */
+             margin-bottom: 0.3rem;
+             font-size: 1rem;
+             font-weight: 500;
          }
          #education .details {
              font-size: 0.9rem;
              color: var(--secondary-accent);
-              transition: color var(--transition-speed) ease;
+             font-style: italic;
+             transition: color var(--transition-speed) ease;
          }
 
 
         /* 10. Contact Section */
-        #contact {
-            text-align: center;
-        }
-         #contact p {
-             max-width: 600px;
-             margin: 0 auto 2rem auto; /* Center and add bottom margin */
-         }
-
-        .contact-methods a {
-            display: block; /* Each link on its own line */
-            margin-bottom: 1rem;
+        #contact { text-align: center; }
+        #contact p {
+            max-width: 650px;
+            margin: 0 auto 2.5rem auto;
             font-size: 1.1rem;
-            font-weight: 500;
         }
-         .contact-methods .social-links {
-             justify-content: center; /* Center social links */
+        .contact-methods a.email-link {
+            display: inline-block; /* Treat email like a button */
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border: 2px solid var(--primary-accent);
+            border-radius: 30px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .contact-methods a.email-link:hover {
+            background-color: var(--primary-accent);
+            color: var(--bg-color);
+             [data-theme="light"] & { color: #fff; }
+             text-decoration: none;
+        }
+        .contact-methods .social-links {
+             justify-content: center;
              margin-top: 2rem;
-         }
-
+        }
 
         /* 11. Footer */
         .main-footer {
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 2.5rem 0;
+            margin-top: 4rem;
             border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            color: var(--secondary-accent);
+            font-size: 0.95rem;
+            color: var(--text-color); /* Use main text color */
+            opacity: 0.7;
             transition: border-color var(--transition-speed), color var(--transition-speed);
         }
+        .main-footer strong { color: var(--primary-accent); } /* Highlight name */
 
         /* 12. Responsive Design */
+        @media (max-width: 992px) {
+            .skills-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            .project-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        }
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .container {
-                padding: 0 1rem;
-            }
-            section {
-                padding: 3rem 0;
-            }
-            .skills-grid, .project-grid {
-                grid-template-columns: 1fr; /* Stack grids on smaller screens */
-            }
-             .main-header .container {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-             #hero {
-                padding-top: 80px; /* More padding needed due to stacked header */
-            }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            .container { padding: 0 1.5rem; }
+            section { padding: 4rem 0; }
+            .skills-grid, .project-grid { grid-template-columns: 1fr; }
+            .main-header .container { flex-direction: column; gap: 1rem; }
+            #hero { padding-top: 120px; } /* More padding for stacked header */
+             .profile-pic-container { width: 150px; height: 150px; }
+             .project-card:hover { transform: translateY(-5px); } /* Reduce hover effect on mobile */
+        }
+
+        /* Animation Keyframes */
+        @keyframes slideInFromBottom {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
     </style>
@@ -499,163 +856,225 @@
         <section id="hero">
             <div class="container">
                 <h1>Saeed Abdul Muizz</h1>
-                <p class="tagline">Data Enthusiast | Python Developer | Mechanical Engineering @ NIT Srinagar</p>
+                <p class="tagline"><span id="typed-tagline"></span></p> <!-- Span for Typed.js -->
                 <p class="hero-intro">
-                    Exploring the intersection of data, code, and engineering. Currently diving deep into Data Science and building practical solutions.
+                    Mechanical Engineering student at NIT Srinagar, passionate about the intersection of data, code, and problem-solving. Actively exploring Data Science and building impactful digital solutions.
                 </p>
                 <div class="social-links">
-                    <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                    <!-- Add other relevant links like email -->
-                     <a href="mailto:saeedabdulmuizz@gmail.com" aria-label="Email Saeed">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
-                     </a>
+                    <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:saeedabdulmuizz@gmail.com" aria-label="Email Saeed"><i class="fas fa-envelope"></i></a>
                 </div>
-                <a href="#projects" class="cta-button">View Projects</a>
+                <a href="#projects" class="cta-button">Explore My Work</a>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="container">
-            <h2>About Me</h2>
+            <br>
+            <h2>Hello There! <i class="fas fa-hand-sparkles" style="color: var(--secondary-accent);"></i></h2>
+            
             <p>
-                I'm a passionate Mechanical Engineering student at the National Institute of Technology (NIT), Srinagar, fascinated by the power of technology to solve real-world problems. My journey began with Python, building tools for web scraping and automation, which ignited my interest in data.
+                I'm currently pursuing Mechanical Engineering at <strong>NIT Srinagar</strong>, but my curiosity extends far beyond traditional mechanics. I discovered a passion for programming through <strong>Python</strong>, initially using it for web scraping and automation tasks. This sparked a deeper interest in the power of data.
             </p>
             <p>
-                Currently, I'm actively learning and applying Data Science concepts, aiming to bridge the gap between engineering principles and data-driven insights. As an active member of the <strong style="color:var(--primary-accent);">Technology Club at NIT Srinagar</strong>, I thrive in collaborative environments, constantly exploring new tools and contributing to innovative projects. My freelance experience has honed my skills in delivering practical, efficient solutions for clients.
+                Now, I'm enthusiastically diving into the world of <strong>Data Science</strong>, learning to extract insights, build predictive models, and visualize complex information. As an active member of the <strong>Technology Club</strong>, I enjoy collaborating on projects and staying updated with the latest tech trends. My freelance work has given me practical experience in delivering effective solutions and managing projects end-to-end.
             </p>
         </section>
 
         <!-- Skills Section -->
         <section id="skills" class="container">
-            <h2>My Tech Stack</h2>
+            <h2>Tech Toolbox <i class="fas fa-tools" style="color: var(--secondary-accent);"></i></h2>
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <ul>
-                        <li>Python</li>
-                        <li>SQL</li>
-                        <li>C++</li>
-                        <li>C</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Data Analysis & Web</h3>
-                    <ul>
-                        <li>Pandas</li>
-                        <li>NumPy</li>
-                        <li>Matplotlib</li>
-                        <li>BeautifulSoup4</li>
-                        <li>Flask</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Tools & Platforms</h3>
-                    <ul>
-                        <li>Git & GitHub</li>
-                        <li>Jupyter Notebooks</li>
-                        <li>VS Code</li>
-                         <li>Fiverr (Freelancing)</li>
-                    </ul>
-                </div>
                  <div class="skill-category">
-                    <h3>Currently Learning</h3>
+                    <h3><i class="fas fa-code"></i> Languages</h3>
                     <ul>
-                        <li>Scikit-learn</li>
-                        <li>Advanced SQL</li>
-                        <li>Data Visualization Tools (e.g., Seaborn)</li>
-                         <li>Machine Learning Concepts</li>
+                        <li><i class="fab fa-python"></i> Python</li>
+                        <li><i class="fas fa-database"></i> SQL</li>
+                        <li><i class="fas fa-c"></i> C++</li>
+                        <li><i class="fas fa-c"></i> C</li>
                     </ul>
                 </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> Data & Web</h3>
+                    <ul>
+                        <li><i class="fas fa-table"></i> Pandas</li>
+                        <li><i class="fas fa-calculator"></i> NumPy</li>
+                        <li><i class="fas fa-chart-bar"></i> Matplotlib</li>
+                        <li><i class="fas fa-spider"></i> BeautifulSoup4</li>
+                        <li><i class="fab fa-python"></i> Flask</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                     <h3><i class="fas fa-laptop-code"></i> Tools & Platforms</h3>
+                     <ul>
+                         <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
+                         <li><i class="fas fa-book"></i> Jupyter Notebooks</li>
+                         <li><i class="fas fa-terminal"></i> VS Code</li>
+                         <li><i class="fas fa-fire"></i> Fiverr (Freelancing)</li>
+                     </ul>
+                 </div>
+                  <div class="skill-category">
+                     <h3><i class="fas fa-lightbulb"></i> Learning Zone</h3>
+                     <ul>
+                         <li><i class="fas fa-brain"></i> Scikit-learn</li>
+                         <li><i class="fas fa-database"></i> Advanced SQL</li>
+                         <li><i class="fas fa-palette"></i> Seaborn</li>
+                         <li><i class="fas fa-robot"></i> ML Concepts</li>
+                     </ul>
+                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="container">
-            <h2>Experience</h2>
-             <ul>
-                 <li>
-                     <h3>Freelancer | Fiverr</h3>
-                     <p class="date">(2021 - Present)</p>
-                     <ul class="experience-details">
-                         <li>Delivered custom web scraping, data analysis, and automation solutions using Python (Pandas, NumPy, BeautifulSoup).</li>
-                         <li>Built Telegram bots and basic Flask web applications for specific client needs.</li>
-                         <li>Processed and cleaned data efficiently using Pandas for analysis tasks.</li>
-                         <li>Maintained strong client communication, ensuring project requirements were met and achieving 5-star ratings.</li>
-                         <li>Managed multiple projects concurrently, adhering to deadlines and quality standards.</li>
-                     </ul>
-                 </li>
-                  <!-- Add other relevant experiences if any -->
-             </ul>
-        </section>
+        <section id="learning-journey" class="container">
+          <h2>My Learning Journey <i class="fas fa-road" style="color: var(--secondary-accent);"></i></h2>
+
+          <div class="timeline-container">
+              <!-- Timeline Item 1: Foundations -->
+              <div class="timeline-item">
+                  <div class="timeline-marker">
+                      <i class="fab fa-python"></i>
+                  </div>
+                  <br>
+                  <div class="timeline-content">
+                      <h3>Phase 1: Python & Automation Foundations</h3>
+                      <span class="timeline-date">Early Exploration</span>
+                      <p>
+                          My technical journey ignited with Python, driven by automating tasks and extracting information via web scraping (BeautifulSoup4). This led to building practical CLI tools and Telegram bots.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Timeline Item 2: Data Handling -->
+              <div class="timeline-item">
+                  <div class="timeline-marker">
+                      <i class="fas fa-table"></i>
+                  </div>
+                  <br>
+                  <div class="timeline-content">
+                      <h3>Phase 2: Data Manipulation & Web Basics</h3>
+                      <span class="timeline-date">Building Blocks</span>
+                      <p>
+                          Working with gathered data sparked deeper interest. Mastered Pandas and NumPy for efficient data handling and gained experience creating simple web interfaces with Flask.
+                      </p>
+                  </div>
+              </div>
+
+              <!-- Timeline Item 3: Current Focus -->
+              <div class="timeline-item">
+                   <div class="timeline-marker">
+                      <i class="fas fa-brain"></i>
+                  </div>
+                  <br>
+                  <div class="timeline-content">
+                      <h3>Phase 3: Diving into Data Science</h3>
+                      <span class="timeline-date">Current Focus</span>
+                      <p>
+                          Solidifying Data Science principles. Actively sharpening skills in visualization (Matplotlib, Seaborn), exploring foundational Machine Learning (Scikit-learn), and mastering data querying with SQL.
+                      </p>
+                  </div>
+              </div>
+
+               <!-- Timeline Item 4: Future Goals -->
+              <div class="timeline-item">
+                   <div class="timeline-marker">
+                      <i class="fas fa-binoculars"></i>
+                  </div>
+                  <br>
+                  <div class="timeline-content">
+                      <h3>Phase 4: Future Horizons</h3>
+                      <span class="timeline-date">Looking Ahead</span>
+                      <p>
+                          Excited to delve into advanced ML algorithms, explore data engineering pipelines, and potentially experiment with deep learning frameworks (TensorFlow/PyTorch) to build robust, data-driven solutions.
+                      </p>
+                  </div>
+              </div>
+
+          </div> <!-- End timeline-container -->
+      </section>
+      <!-- End of My Learning Journey Section -->
 
         <!-- Projects Section -->
         <section id="projects" class="container">
-            <h2>Projects</h2>
+            <h2>Featured Creations <i class="fas fa-paint-brush" style="color: var(--secondary-accent);"></i></h2>
             <div class="project-grid">
+                <!-- Project: Hadith Verification Telegram Bot -->
                 <article class="project-card">
-                    <h3>Watchlist Manager</h3>
-                    <p>A command-line application developed in Python to help users manage personal watchlists of movies and TV series. Allows adding, updating, tracking, and retrieving details.</p>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Pandas</span>
-                        <span>IMDbPY</span>
-                        <span>CLI</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
-                        <!-- <a href="#" target="_blank" rel="noopener noreferrer">Live Demo [→]</a> -->
+                  
+                 <div class="project-content">
+                      <h3>Hadith Verification Telegram Bot</h3>
+                     <p>
+                         A simple yet powerful Telegram bot built with Python for verifying Hadiths using their numbers. Designed to provide authentic references quickly and effortlessly by leveraging data from <strong>sunnah.com</strong>. Features minimal setup via a Telegram API key.
+                     </p>
+                     <div class="project-tags">
+                         <span>Python</span>
+                         <span>Telegram Bot</span>
+                         <span>Web Scraping</span>
+                         <span>Hadith</span>
+                         <span>sunnah.com</span>
+                     </div>
+                     <div class="project-links">
+                         <a href="https://github.com/abdulmuizz0903/Hadith-Verification-TG-Bot" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                     </div>
+                 </div>
+             </article>
+
+                <article class="project-card">
+                     
+                    <div class="project-content">
+                         <h3>Watchlist Manager</h3>
+                        <p>A handy command-line tool built with Python for managing personal movie/TV watchlists. Fetch details using IMDbPY and manage data with Pandas.</p>
+                        <div class="project-tags">
+                            <span>Python</span> <span>Pandas</span> <span>IMDbPY</span> <span>CLI</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
                     </div>
                 </article>
 
                 <article class="project-card">
-                    <h3>Data Science Explorations (Ongoing)</h3>
-                    <p>Currently working on various projects involving data analysis, visualization, and introductory machine learning concepts using datasets from platforms like Kaggle. Focus areas include data cleaning, exploratory data analysis (EDA), and model building.</p>
-                     <div class="project-tags">
-                        <span>Python</span>
-                        <span>Pandas</span>
-                        <span>NumPy</span>
-                        <span>Matplotlib</span>
-                        <span>Seaborn</span>
-                         <span>Scikit-learn</span>
-                         <span>Jupyter</span>
-                    </div>
-                    <div class="project-links">
-                         <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
-                    </div>
+                     
+                     <div class="project-content">
+                        <h3>Data Science Explorations</h3>
+                        <p>Ongoing projects involving EDA, data visualization (Matplotlib, Seaborn), and introductory Machine Learning (Scikit-learn) on diverse datasets from sources like Kaggle.</p>
+                         <div class="project-tags">
+                            <span>Python</span> <span>Pandas</span> <span>NumPy</span> <span>Matplotlib</span> <span>Seaborn</span> <span>Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                     </div>
                 </article>
 
                  <article class="project-card">
-                    <h3>More Projects Coming Soon</h3>
-                    <p>Actively developing more projects, especially in the Data Science domain. Check back later or visit my GitHub!</p>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Data Science</span>
-                         <span>Automation</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
-                    </div>
+                     
+                      <div class="project-content">
+                        <h3>More Awesome Stuff Soon!</h3>
+                        <p>Actively working on new projects focused on data analysis, automation, and web development. Keep an eye on my GitHub for the latest updates!</p>
+                        <div class="project-tags">
+                            <span>Data Science</span> <span>Python</span> <span>Web Dev</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                     </div>
                 </article>
             </div>
         </section>
 
         <!-- Education & Activities Section -->
         <section id="education" class="container">
-            <h2>Education & Activities</h2>
+            <h2>Education & Milestones <i class="fas fa-graduation-cap" style="color: var(--secondary-accent);"></i></h2>
             <ul>
                 <li>
-                     <span class="institution">National Institute of Technology (NIT), Srinagar</span><br>
-                     B.Tech, Mechanical Engineering <br>
+                     <span class="institution">National Institute of Technology (NIT), Srinagar</span>
+                     <span class="degree">B.Tech, Mechanical Engineering</span>
                      <span class="details">(2024 - 2028) | Active Member, Technology Club</span>
                 </li>
                 <li>
-                    <span class="institution">Delhi Public School (DPS), Budgam</span><br>
-                     XII (CBSE) <br>
+                    <span class="institution">Delhi Public School (DPS), Budgam</span>
+                     <span class="degree">XII (CBSE) - Science Stream</span>
                      <span class="details">(Completed 2023) | House Captain, Student Council (2022-23)</span>
                 </li>
             </ul>
@@ -663,19 +1082,15 @@
 
         <!-- Contact Section -->
         <section id="contact" class="container">
-            <h2>Get In Touch</h2>
+            <h2>Let's Connect! <i class="fas fa-paper-plane" style="color: var(--secondary-accent);"></i></h2>
             <p>
-                I'm always open to discussing new projects, freelance opportunities, or just chatting about technology and data science. Feel free to reach out!
+                Interested in collaborating, have a project idea, or just want to chat about tech? Feel free to reach out - I'd love to hear from you!
             </p>
             <div class="contact-methods">
-                <a href="mailto:saeedabdulmuizz@gmail.com">saeedabdulmuizz@gmail.com</a>
+                <a href="mailto:saeedabdulmuizz@gmail.com" class="email-link"><i class="fas fa-envelope"></i> Send an Email</a>
                  <div class="social-links">
-                     <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                     </a>
-                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
+                     <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
                  </div>
             </div>
         </section>
@@ -683,81 +1098,150 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>© <span id="current-year"></span> Saeed Abdul Muizz. All rights reserved.</p>
+            <p>Designed & Built by <strong>Saeed Abdul Muizz</strong> & <strong>Gemini AI Studio</strong> | © <span id="current-year"></span></p>
         </div>
     </footer>
 
-    <script>
-        // 1. Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-        const htmlElement = document.documentElement; // Target the <html> tag
+        <!-- Typed.js CDN (Keep this if you haven't placed it in <head>) -->
+          <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
-        // Apply saved theme on initial load
-        if (currentTheme) {
-            htmlElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'light') {
-                themeToggle.textContent = 'Dark Mode';
-            } else {
-                 themeToggle.textContent = 'Light Mode';
-             }
-        } else {
-             // Default to dark if no preference saved
-             htmlElement.setAttribute('data-theme', 'dark');
-             themeToggle.textContent = 'Light Mode';
-         }
-
-        themeToggle.addEventListener('click', () => {
-            let current = htmlElement.getAttribute('data-theme');
-            if (current === 'dark') {
-                htmlElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeToggle.textContent = 'Dark Mode';
-            } else {
-                htmlElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                 themeToggle.textContent = 'Light Mode';
-            }
-        });
-
-        // 2. Scroll Animation Functionality (Intersection Observer)
-        const sections = document.querySelectorAll('section'); // Target all sections
-        const projectCards = document.querySelectorAll('.project-card, .skill-category li, #experience ul > li, #education ul li'); // Add other elements to animate
-
-        const observerOptions = {
-            root: null, // relative to the viewport
-            rootMargin: '0px',
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // Optional: unobserve after it's visible once
-                    // observer.unobserve(entry.target);
-                } else {
-                     // Optional: remove class if you want animation to repeat when scrolling up/down
-                     // entry.target.classList.remove('is-visible');
-                 }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-         projectCards.forEach(card => {
-            // Add a slight delay based on index for a staggered effect (optional)
-            // card.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(card);
-        });
-
-
-        // 3. Update Footer Year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    </script>
+          <script>
+              document.addEventListener('DOMContentLoaded', () => { // Ensure DOM is fully loaded
+      
+                  // 1. Theme Toggle Functionality
+                  const themeToggle = document.getElementById('theme-toggle');
+                  const htmlElement = document.documentElement; // Target the <html> tag
+                  // Default to dark if no preference or system preference doesn't match light
+                  const initialTheme = localStorage.getItem('theme') ||
+                                       (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      
+                  function applyTheme(theme) {
+                      htmlElement.setAttribute('data-theme', theme);
+                      if (theme === 'light') {
+                          themeToggle.textContent = 'Dark Mode';
+                      } else {
+                          themeToggle.textContent = 'Light Mode';
+                      }
+                      localStorage.setItem('theme', theme); // Save preference
+                  }
+      
+                  applyTheme(initialTheme); // Apply theme on initial load
+      
+                  themeToggle.addEventListener('click', () => {
+                      let currentTheme = htmlElement.getAttribute('data-theme');
+                      let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                      applyTheme(newTheme);
+                  });
+      
+                  // 2. Scroll Animation Functionality (Intersection Observer)
+                  // Select all elements you want to animate on scroll
+                  const animatedElements = document.querySelectorAll(
+                      'section, .project-card, .skill-category, #education ul li, .timeline-item'
+                  );
+      
+                  const observerOptions = {
+                      root: null, // Use the viewport as the root
+                      rootMargin: '0px',
+                      threshold: 0.1 // Trigger when 10% of the element is visible
+                  };
+      
+                  const observerCallback = (entries, observer) => {
+                      entries.forEach((entry, index) => {
+                          if (entry.isIntersecting) {
+                              // Add the 'is-visible' class to trigger the animation
+                              entry.target.classList.add('is-visible');
+      
+                              // Apply staggered delay specifically for timeline items
+                              if (entry.target.classList.contains('timeline-item')) {
+                                  // Calculate delay based on the order they appear in the NodeList
+                                  // This provides a simple sequential stagger
+                                   entry.target.style.transitionDelay = `${index * 0.15}s`;
+                              }
+      
+                              // Optional: Unobserve after animation to improve performance
+                              // observer.unobserve(entry.target);
+      
+                          }
+                          // Optional: If you want elements to animate *out* when scrolling up, uncomment below
+                          // else {
+                          //    // Don't remove delay if you remove visibility, or it will snap
+                          //    entry.target.classList.remove('is-visible');
+                          // }
+                      });
+                  };
+      
+                  const observer = new IntersectionObserver(observerCallback, observerOptions);
+      
+                  // Observe all selected elements
+                  animatedElements.forEach(el => {
+                      if (el) { // Ensure element exists before observing
+                           observer.observe(el);
+                       }
+                  });
+      
+      
+                  // 3. Update Footer Year
+                   const currentYearSpan = document.getElementById('current-year');
+                   if (currentYearSpan) {
+                      currentYearSpan.textContent = new Date().getFullYear();
+                   }
+      
+      
+                  // 4. Typed.js Initialization
+                  const typedElement = document.querySelector('#typed-tagline');
+                  if (typedElement) { // Check if the element exists before initializing
+                      const typedOptions = {
+                          strings: [
+                              "Data Enthusiast",
+                              "Python Developer",
+                              "Mechanical Engineering Student",
+                              "Freelancer",
+                              "Tech Club Member @ NIT Srinagar"
+                          ],
+                          typeSpeed: 50, // Typing speed (ms)
+                          backSpeed: 30, // Backspacing speed (ms)
+                          backDelay: 1500, // Delay before backspacing (ms)
+                          startDelay: 500, // Delay before starting (ms)
+                          loop: true, // Loop the animation
+                          showCursor: true,
+                          cursorChar: '|',
+                      };
+                      try {
+                           const typed = new Typed('#typed-tagline', typedOptions);
+                      } catch (e) {
+                           console.error("Typed.js initialization failed:", e);
+                      }
+                  } else {
+                       console.warn("Element with ID 'typed-tagline' not found for Typed.js.");
+                  }
+      
+      
+                  // 5. Smooth Scrolling for internal links
+                  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                      anchor.addEventListener('click', function (e) {
+                          const hrefAttribute = this.getAttribute('href');
+      
+                          // Check if it's more than just "#"
+                          if (hrefAttribute && hrefAttribute.length > 1) {
+                              try {
+                                  const targetElement = document.querySelector(hrefAttribute);
+                                  if (targetElement) {
+                                      e.preventDefault(); // Prevent default jump only if target exists
+                                      targetElement.scrollIntoView({
+                                          behavior: 'smooth',
+                                          block: 'start' // Aligns the top of the target element to the top of the viewport
+                                      });
+                                  }
+                              } catch (error) {
+                                  // Handle potential errors with invalid selectors, though unlikely for simple IDs
+                                  console.error("Error finding or scrolling to element:", hrefAttribute, error);
+                              }
+                          }
+                          // Allow default behavior for href="#" (often used for placeholder links)
+                      });
+                  });
+      
+              }); // End of DOMContentLoaded listener
+          </script>
 </body>
 </html>
