@@ -1,152 +1,763 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Abdul Muizz</title>
-  <meta name="description" content="Welcome to Abdul Muizz's Informal Professional Webpage. Created it just for fun. I am also called Saeed Abdul Muizz.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-  <!-- <link rel="stylesheet" href="style.css"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saeed Abdul Muizz - Portfolio</title>
+    <style>
+        /* 1. CSS Variables and Base Styles */
+        :root {
+            --bg-color-dark: #121212;
+            --text-color-dark: #e0e0e0;
+            --card-bg-dark: #1e1e1e;
+            --border-color-dark: #333;
+            --primary-accent-dark: #00aaff; /* Techy blue */
+            --secondary-accent-dark: #444;
+
+            --bg-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --card-bg-light: #ffffff;
+            --border-color-light: #dee2e6;
+            --primary-accent-light: #007bff;
+            --secondary-accent-light: #e9ecef;
+
+            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: var(--bg-color-dark);
+            --text-color: var(--text-color-dark);
+            --card-bg: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+            --primary-accent: var(--primary-accent-dark);
+            --secondary-accent: var(--secondary-accent-dark);
+        }
+
+        [data-theme="light"] {
+            --bg-color: var(--bg-color-light);
+            --text-color: var(--text-color-light);
+            --card-bg: var(--card-bg-light);
+            --border-color: var(--border-color-light);
+            --primary-accent: var(--primary-accent-light);
+            --secondary-accent: var(--secondary-accent-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        /* 2. Layout and Containers */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            opacity: 0; /* Initially hidden for scroll animation */
+            transform: translateY(30px); /* Start slightly lower */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform; /* Optimize animation */
+        }
+
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header/Nav - Minimal */
+        .main-header {
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(18, 18, 18, 0.8); /* Semi-transparent dark background */
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+             transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+         [data-theme="light"] .main-header {
+             background-color: rgba(248, 249, 250, 0.8); /* Semi-transparent light background */
+         }
+
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-accent);
+            text-decoration: none;
+        }
+
+        .theme-toggle-button {
+            background: none;
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .theme-toggle-button:hover {
+            background-color: var(--primary-accent);
+            color: var(--bg-color); /* Text color swaps on hover */
+        }
+         /* Adjust button text color for light theme hover */
+        [data-theme="light"] .theme-toggle-button:hover {
+             color: var(--text-color-light);
+         }
+
+
+        /* 3. Typography */
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-accent);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+         /* Underline effect for section headers */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-accent);
+        }
+
+
+        h3 {
+            font-size: 1.5rem;
+             color: var(--text-color); /* Slightly less emphasis than h2 */
+             transition: color var(--transition-speed) ease;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+             transition: color var(--transition-speed) ease;
+        }
+
+        a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            filter: brightness(1.1);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0; /* Remove default padding */
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* 4. Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px; /* Account for fixed header */
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--secondary-accent);
+             transition: color var(--transition-speed) ease;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-intro {
+            max-width: 600px;
+            margin-bottom: 2rem;
+             font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem; /* Spacing between icons */
+             margin-top: 1rem;
+             margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem; /* Make icons slightly larger */
+            color: var(--text-color);
+             transition: color var(--transition-speed), transform 0.2s ease;
+        }
+         .social-links a:hover {
+             color: var(--primary-accent);
+             transform: scale(1.1);
+             text-decoration: none; /* No underline for icons */
+         }
+
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-accent);
+            color: var(--bg-color); /* Text color contrasts with button */
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color var(--transition-speed), transform 0.2s ease, color var(--transition-speed);
+        }
+         /* Adjust button text color for light theme */
+         [data-theme="light"] .cta-button {
+              color: var(--text-color-light);
+         }
+
+
+        .cta-button:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+             text-decoration: none;
+        }
+
+        /* 5. About Section */
+        #about p {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center; /* Center align text */
+            font-size: 1.1rem;
+        }
+
+        /* 6. Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-accent); /* Highlight category titles */
+        }
+        .skill-category ul {
+            padding-left: 0;
+        }
+
+        .skill-category li {
+             background-color: var(--card-bg);
+             padding: 0.8rem;
+             border-radius: 5px;
+             margin-bottom: 0.75rem;
+             border: 1px solid var(--border-color);
+             transition: background-color var(--transition-speed), border-color var(--transition-speed), transform 0.2s ease;
+         }
+         .skill-category li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+             border-color: var(--primary-accent);
+         }
+
+
+        /* 7. Experience Section */
+         #experience ul li {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+             border: 1px solid var(--border-color);
+             transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+        #experience h3 {
+             margin-bottom: 0.25rem; /* Reduce space below job title */
+        }
+         .experience-details {
+             margin-top: 0.5rem;
+             padding-left: 1.5rem; /* Indent bullet points */
+         }
+         .experience-details li {
+             list-style-type: disc; /* Use standard bullets */
+             background: none; /* Remove card background from list items */
+             padding: 0.2rem 0;
+             border: none;
+             margin-bottom: 0.5rem;
+             color: var(--text-color); /* Ensure bullets inherit text color */
+             opacity: 0.9;
+             font-size: 0.95rem;
+         }
+         .date {
+             font-style: italic;
+             color: var(--secondary-accent);
+             font-size: 0.9rem;
+             margin-bottom: 1rem;
+             transition: color var(--transition-speed) ease;
+         }
+
+
+        /* 8. Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed), border-color var(--transition-speed);
+             display: flex;
+             flex-direction: column; /* Ensure content stacks vertically */
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.1); /* Subtle glow with primary color */
+        }
+         .project-card h3 {
+            margin-bottom: 0.75rem;
+         }
+         .project-card p {
+             flex-grow: 1; /* Make description take available space */
+             margin-bottom: 1rem;
+             font-size: 0.95rem;
+             opacity: 0.9;
+         }
+
+
+        .project-tags {
+            margin-bottom: 1rem;
+             display: flex;
+             flex-wrap: wrap;
+             gap: 0.5rem;
+        }
+
+        .project-tags span {
+            background-color: var(--secondary-accent);
+            color: var(--bg-color); /* Contrast tag text */
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px; /* Pill shape */
+            font-size: 0.8rem;
+            font-weight: 500;
+             transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+          /* Adjust tag text color for light theme */
+         [data-theme="light"] .project-tags span {
+             color: var(--text-color-light);
+         }
+
+
+        .project-links a {
+             margin-right: 1rem;
+             font-weight: bold;
+             display: inline-block; /* Ensure links behave well */
+             transition: color 0.2s ease;
+         }
+         .project-links a:hover {
+             color: var(--primary-accent);
+             filter: brightness(1.2);
+             text-decoration: none;
+         }
+
+
+        /* 9. Education Section */
+        #education ul li {
+            border-left: 3px solid var(--primary-accent);
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+         #education .institution {
+             font-weight: bold;
+         }
+         #education .details {
+             font-size: 0.9rem;
+             color: var(--secondary-accent);
+              transition: color var(--transition-speed) ease;
+         }
+
+
+        /* 10. Contact Section */
+        #contact {
+            text-align: center;
+        }
+         #contact p {
+             max-width: 600px;
+             margin: 0 auto 2rem auto; /* Center and add bottom margin */
+         }
+
+        .contact-methods a {
+            display: block; /* Each link on its own line */
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+         .contact-methods .social-links {
+             justify-content: center; /* Center social links */
+             margin-top: 2rem;
+         }
+
+
+        /* 11. Footer */
+        .main-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-accent);
+            transition: border-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        /* 12. Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            section {
+                padding: 3rem 0;
+            }
+            .skills-grid, .project-grid {
+                grid-template-columns: 1fr; /* Stack grids on smaller screens */
+            }
+             .main-header .container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+             #hero {
+                padding-top: 80px; /* More padding needed due to stacked header */
+            }
+        }
+
+    </style>
 </head>
-
 <body>
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <nav class="bg-gray-800">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
-        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <!-- Mobile menu button-->
-          <button type="button" id="menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <!--
-              Icon when menu is closed.
-  
-              Heroicon name: outline/menu
-  
-              Menu open: "hidden", Menu closed: "block"
-            -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!--
-              Icon when menu is open.
-  
-              Heroicon name: outline/x
-  
-              Menu open: "block", Menu closed: "hidden"
-            -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#hero" class="logo">Saeed A. Muizz</a>
+            <button id="theme-toggle" class="theme-toggle-button">Light Mode</button>
         </div>
-        <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="hidden sm:block sm:ml-6">
-            <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                aria-current="page">Home</a>
-              <a href="https://www.github.com/abdulmuizz0903/abdulmuizz0903.github.io"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contribute
-                To this Webpage</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden hidden" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-          aria-current="page">Home</a>
-        <a href="https://www.github.com/abdulmuizz0903/abdulmuizz0903.github.io"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contribute
-          To this Webpage</a>
-      </div>
-    </div>
-  </nav>
-  <div class="relative bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-        <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <polygon points="50,0 100,0 50,100 0,100" />
-        </svg>
+    </header>
 
-        <div>
-          <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
-
-          </div>
-
-          <!--
-                Mobile menu, show/hide based on menu open state.
-      
-                Entering: "duration-150 ease-out"
-                  From: "opacity-0 scale-95"
-                  To: "opacity-100 scale-100"
-                Leaving: "duration-100 ease-in"
-                  From: "opacity-100 scale-100"
-                  To: "opacity-0 scale-95"
-              -->
-          <div class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-
-          </div>
-
-          <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div class="sm:text-center lg:text-left">
-              <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block xl:inline">Abdul Muizz</span>
-              </h1>
-              <h2 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block text-indigo-600 xl:inline">Python Enthusiast</span>
-              </h2>
-              <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">Welcome to my Informal Professional Webpage. Created it just for fun. Copied Template from Tailwind as I am not good in Css.</p>
-              <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div class="rounded-md shadow">
-                  <a href="https://www.github.com/abdulmuizz0903"
-                    class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"><svg
-                      xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48"
-                      style=" fill:#000000;">
-                      <linearGradient id="rL2wppHyxHVbobwndsT6Ca_AZOZNnY73haj_gr1" x1="4" x2="44" y1="23.508"
-                        y2="23.508" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stop-color="#4c4c4c"></stop>
-                        <stop offset="1" stop-color="#343434"></stop>
-                      </linearGradient>
-                      <path fill="url(#rL2wppHyxHVbobwndsT6Ca_AZOZNnY73haj_gr1)"
-                        d="M24,4C12.954,4,4,12.954,4,24c0,8.887,5.801,16.411,13.82,19.016h12.36	C38.199,40.411,44,32.887,44,24C44,12.954,35.046,4,24,4z">
-                      </path>
-                      <path
-                        d="M30.01,41.996L30,36.198c0-0.939-0.22-1.856-0.642-2.687c5.641-1.133,8.386-4.468,8.386-10.177	c0-2.255-0.665-4.246-1.976-5.92c0.1-0.317,0.174-0.645,0.22-0.981c0.188-1.369-0.023-2.264-0.193-2.984l-0.027-0.116	c-0.186-0.796-0.409-1.364-0.418-1.388l-0.111-0.282l-0.111-0.282l-0.302-0.032l-0.303-0.032c0,0-0.199-0.021-0.501-0.021	c-0.419,0-1.04,0.042-1.627,0.241l-0.196,0.066c-0.74,0.249-1.439,0.485-2.417,1.069c-0.286,0.171-0.599,0.366-0.934,0.584	C27.334,12.881,25.705,12.69,24,12.69c-1.722,0-3.365,0.192-4.889,0.571c-0.339-0.22-0.654-0.417-0.942-0.589	c-0.978-0.584-1.677-0.819-2.417-1.069l-0.196-0.066c-0.585-0.199-1.207-0.241-1.626-0.241c-0.302,0-0.501,0.021-0.501,0.021	l-0.302,0.032l-0.3,0.031l-0.112,0.281l-0.113,0.283c-0.01,0.026-0.233,0.594-0.419,1.391l-0.027,0.115	c-0.17,0.719-0.381,1.615-0.193,2.983c0.048,0.346,0.125,0.685,0.23,1.011c-1.285,1.666-1.936,3.646-1.936,5.89	c0,5.695,2.748,9.028,8.397,10.17c-0.194,0.388-0.345,0.798-0.452,1.224c-0.197,0.067-0.378,0.112-0.538,0.137	c-0.238,0.036-0.487,0.054-0.739,0.054c-0.686,0-1.225-0.134-1.435-0.259c-0.313-0.186-0.872-0.727-1.414-1.518	c-0.463-0.675-1.185-1.558-1.992-1.927c-0.698-0.319-1.437-0.502-2.029-0.502c-0.138,0-0.265,0.01-0.376,0.028	c-0.517,0.082-0.949,0.366-1.184,0.78c-0.203,0.357-0.235,0.773-0.088,1.141c0.219,0.548,0.851,0.985,1.343,1.255	c0.242,0.133,0.765,0.619,1.07,1.109c0.229,0.368,0.335,0.63,0.482,0.992c0.087,0.215,0.183,0.449,0.313,0.732	c0.47,1.022,1.937,1.924,2.103,2.023c0.806,0.483,2.161,0.638,3.157,0.683l0.123,0.003c0,0,0.001,0,0.001,0	c0.24,0,0.57-0.023,1.004-0.071v2.613c0.002,0.529-0.537,0.649-1.25,0.638l0.547,0.184C19.395,43.572,21.645,44,24,44	c2.355,0,4.605-0.428,6.703-1.176l0.703-0.262C30.695,42.538,30.016,42.422,30.01,41.996z"
-                        opacity=".05"></path>
-                      <path
-                        d="M30.781,42.797c-0.406,0.047-1.281-0.109-1.281-0.795v-5.804c0-1.094-0.328-2.151-0.936-3.052	c5.915-0.957,8.679-4.093,8.679-9.812c0-2.237-0.686-4.194-2.039-5.822c0.137-0.365,0.233-0.75,0.288-1.147	c0.175-1.276-0.016-2.086-0.184-2.801l-0.027-0.116c-0.178-0.761-0.388-1.297-0.397-1.319l-0.111-0.282l-0.303-0.032	c0,0-0.178-0.019-0.449-0.019c-0.381,0-0.944,0.037-1.466,0.215l-0.196,0.066c-0.714,0.241-1.389,0.468-2.321,1.024	c-0.332,0.198-0.702,0.431-1.101,0.694C27.404,13.394,25.745,13.19,24,13.19c-1.762,0-3.435,0.205-4.979,0.61	c-0.403-0.265-0.775-0.499-1.109-0.699c-0.932-0.556-1.607-0.784-2.321-1.024l-0.196-0.066c-0.521-0.177-1.085-0.215-1.466-0.215	c-0.271,0-0.449,0.019-0.449,0.019l-0.302,0.032l-0.113,0.283c-0.009,0.022-0.219,0.558-0.397,1.319l-0.027,0.116	c-0.169,0.715-0.36,1.524-0.184,2.8c0.056,0.407,0.156,0.801,0.298,1.174c-1.327,1.62-1.999,3.567-1.999,5.795	c0,5.703,2.766,8.838,8.686,9.806c-0.395,0.59-0.671,1.255-0.813,1.964c-0.33,0.13-0.629,0.216-0.891,0.256	c-0.263,0.04-0.537,0.06-0.814,0.06c-0.69,0-1.353-0.129-1.69-0.329c-0.44-0.261-1.057-0.914-1.572-1.665	c-0.35-0.51-1.047-1.417-1.788-1.755c-0.635-0.29-1.298-0.457-1.821-0.457c-0.11,0-0.21,0.008-0.298,0.022	c-0.366,0.058-0.668,0.252-0.828,0.534c-0.128,0.224-0.149,0.483-0.059,0.708c0.179,0.448,0.842,0.85,1.119,1.002	c0.335,0.184,0.919,0.744,1.254,1.284c0.251,0.404,0.37,0.697,0.521,1.067c0.085,0.209,0.178,0.437,0.304,0.712	c0.331,0.719,1.353,1.472,1.905,1.803c0.754,0.452,2.154,0.578,2.922,0.612l0.111,0.002c0.299,0,0.8-0.045,1.495-0.135v3.177	c0,0.779-0.991,0.81-1.234,0.81c-0.031,0,0.503,0.184,0.503,0.184C19.731,43.64,21.822,44,24,44c2.178,0,4.269-0.36,6.231-1.003	C30.231,42.997,30.812,42.793,30.781,42.797z"
-                        opacity=".07"></path>
-                      <path fill="#fff"
-                        d="M36.744,23.334c0-2.31-0.782-4.226-2.117-5.728c0.145-0.325,0.296-0.761,0.371-1.309	c0.172-1.25-0.031-2-0.203-2.734s-0.375-1.25-0.375-1.25s-0.922-0.094-1.703,0.172s-1.453,0.469-2.422,1.047	c-0.453,0.27-0.909,0.566-1.27,0.806C27.482,13.91,25.785,13.69,24,13.69c-1.801,0-3.513,0.221-5.067,0.652	c-0.362-0.241-0.821-0.539-1.277-0.811c-0.969-0.578-1.641-0.781-2.422-1.047s-1.703-0.172-1.703-0.172s-0.203,0.516-0.375,1.25	s-0.375,1.484-0.203,2.734c0.077,0.562,0.233,1.006,0.382,1.333c-1.31,1.493-2.078,3.397-2.078,5.704	c0,5.983,3.232,8.714,9.121,9.435c-0.687,0.726-1.148,1.656-1.303,2.691c-0.387,0.17-0.833,0.33-1.262,0.394	c-1.104,0.167-2.271,0-2.833-0.333s-1.229-1.083-1.729-1.813c-0.422-0.616-1.031-1.331-1.583-1.583	c-0.729-0.333-1.438-0.458-1.833-0.396c-0.396,0.063-0.583,0.354-0.5,0.563c0.083,0.208,0.479,0.521,0.896,0.75	c0.417,0.229,1.063,0.854,1.438,1.458c0.418,0.674,0.5,1.063,0.854,1.833c0.249,0.542,1.101,1.219,1.708,1.583	c0.521,0.313,1.562,0.491,2.688,0.542c0.389,0.018,1.308-0.096,2.083-0.206v3.75c0,0.639-0.585,1.125-1.191,1.013	C19.756,43.668,21.833,44,24,44c2.166,0,4.243-0.332,6.19-0.984C29.585,43.127,29,42.641,29,42.002v-5.804	c0-1.329-0.527-2.53-1.373-3.425C33.473,32.071,36.744,29.405,36.744,23.334z M11.239,32.727c-0.154-0.079-0.237-0.225-0.185-0.328	c0.052-0.103,0.22-0.122,0.374-0.043c0.154,0.079,0.237,0.225,0.185,0.328S11.393,32.806,11.239,32.727z M12.451,33.482	c-0.081,0.088-0.255,0.06-0.389-0.062s-0.177-0.293-0.096-0.381c0.081-0.088,0.255-0.06,0.389,0.062S12.532,33.394,12.451,33.482z M13.205,34.732c-0.102,0.072-0.275,0.005-0.386-0.15s-0.118-0.34-0.016-0.412s0.275-0.005,0.386,0.15	C13.299,34.475,13.307,34.66,13.205,34.732z M14.288,35.673c-0.069,0.112-0.265,0.117-0.437,0.012s-0.256-0.281-0.187-0.393	c0.069-0.112,0.265-0.117,0.437-0.012S14.357,35.561,14.288,35.673z M15.312,36.594c-0.213-0.026-0.371-0.159-0.353-0.297	c0.017-0.138,0.204-0.228,0.416-0.202c0.213,0.026,0.371,0.159,0.353,0.297C15.711,36.529,15.525,36.62,15.312,36.594z M16.963,36.833c-0.227-0.013-0.404-0.143-0.395-0.289c0.009-0.146,0.2-0.255,0.427-0.242c0.227,0.013,0.404,0.143,0.395,0.289	C17.381,36.738,17.19,36.846,16.963,36.833z M18.521,36.677c-0.242,0-0.438-0.126-0.438-0.281s0.196-0.281,0.438-0.281	c0.242,0,0.438,0.126,0.438,0.281S18.762,36.677,18.521,36.677z">
-                      </path>
-                    </svg></a>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1>Saeed Abdul Muizz</h1>
+                <p class="tagline">Data Enthusiast | Python Developer | Mechanical Engineering @ NIT Srinagar</p>
+                <p class="hero-intro">
+                    Exploring the intersection of data, code, and engineering. Currently diving deep into Data Science and building practical solutions.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <!-- Add other relevant links like email -->
+                     <a href="mailto:saeedabdulmuizz@gmail.com" aria-label="Email Saeed">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                     </a>
                 </div>
-                <div class="mt-3 sm:mt-0 sm:ml-3">
-                  <a href="https://www.twitter.com/abdulmuizz_0903" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" 
-                    width="48" height="48" 
-                    viewBox="0 0 48 48"
-                    style=" fill:#000000;"><path fill="#03A9F4" d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path></svg></a>
-                </div>
-              </div>
+                <a href="#projects" class="cta-button">View Projects</a>
             </div>
-          </main>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container">
+            <h2>About Me</h2>
+            <p>
+                I'm a passionate Mechanical Engineering student at the National Institute of Technology (NIT), Srinagar, fascinated by the power of technology to solve real-world problems. My journey began with Python, building tools for web scraping and automation, which ignited my interest in data.
+            </p>
+            <p>
+                Currently, I'm actively learning and applying Data Science concepts, aiming to bridge the gap between engineering principles and data-driven insights. As an active member of the <strong style="color:var(--primary-accent);">Technology Club at NIT Srinagar</strong>, I thrive in collaborative environments, constantly exploring new tools and contributing to innovative projects. My freelance experience has honed my skills in delivering practical, efficient solutions for clients.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="container">
+            <h2>My Tech Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>SQL</li>
+                        <li>C++</li>
+                        <li>C</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Analysis & Web</h3>
+                    <ul>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Matplotlib</li>
+                        <li>BeautifulSoup4</li>
+                        <li>Flask</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>Jupyter Notebooks</li>
+                        <li>VS Code</li>
+                         <li>Fiverr (Freelancing)</li>
+                    </ul>
+                </div>
+                 <div class="skill-category">
+                    <h3>Currently Learning</h3>
+                    <ul>
+                        <li>Scikit-learn</li>
+                        <li>Advanced SQL</li>
+                        <li>Data Visualization Tools (e.g., Seaborn)</li>
+                         <li>Machine Learning Concepts</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="container">
+            <h2>Experience</h2>
+             <ul>
+                 <li>
+                     <h3>Freelancer | Fiverr</h3>
+                     <p class="date">(2021 - Present)</p>
+                     <ul class="experience-details">
+                         <li>Delivered custom web scraping, data analysis, and automation solutions using Python (Pandas, NumPy, BeautifulSoup).</li>
+                         <li>Built Telegram bots and basic Flask web applications for specific client needs.</li>
+                         <li>Processed and cleaned data efficiently using Pandas for analysis tasks.</li>
+                         <li>Maintained strong client communication, ensuring project requirements were met and achieving 5-star ratings.</li>
+                         <li>Managed multiple projects concurrently, adhering to deadlines and quality standards.</li>
+                     </ul>
+                 </li>
+                  <!-- Add other relevant experiences if any -->
+             </ul>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                <article class="project-card">
+                    <h3>Watchlist Manager</h3>
+                    <p>A command-line application developed in Python to help users manage personal watchlists of movies and TV series. Allows adding, updating, tracking, and retrieving details.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>IMDbPY</span>
+                        <span>CLI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
+                        <!-- <a href="#" target="_blank" rel="noopener noreferrer">Live Demo [→]</a> -->
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <h3>Data Science Explorations (Ongoing)</h3>
+                    <p>Currently working on various projects involving data analysis, visualization, and introductory machine learning concepts using datasets from platforms like Kaggle. Focus areas include data cleaning, exploratory data analysis (EDA), and model building.</p>
+                     <div class="project-tags">
+                        <span>Python</span>
+                        <span>Pandas</span>
+                        <span>NumPy</span>
+                        <span>Matplotlib</span>
+                        <span>Seaborn</span>
+                         <span>Scikit-learn</span>
+                         <span>Jupyter</span>
+                    </div>
+                    <div class="project-links">
+                         <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
+                    </div>
+                </article>
+
+                 <article class="project-card">
+                    <h3>More Projects Coming Soon</h3>
+                    <p>Actively developing more projects, especially in the Data Science domain. Check back later or visit my GitHub!</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Data Science</span>
+                         <span>Automation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer">GitHub [→]</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Education & Activities Section -->
+        <section id="education" class="container">
+            <h2>Education & Activities</h2>
+            <ul>
+                <li>
+                     <span class="institution">National Institute of Technology (NIT), Srinagar</span><br>
+                     B.Tech, Mechanical Engineering <br>
+                     <span class="details">(2024 - 2028) | Active Member, Technology Club</span>
+                </li>
+                <li>
+                    <span class="institution">Delhi Public School (DPS), Budgam</span><br>
+                     XII (CBSE) <br>
+                     <span class="details">(Completed 2023) | House Captain, Student Council (2022-23)</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="container">
+            <h2>Get In Touch</h2>
+            <p>
+                I'm always open to discussing new projects, freelance opportunities, or just chatting about technology and data science. Feel free to reach out!
+            </p>
+            <div class="contact-methods">
+                <a href="mailto:saeedabdulmuizz@gmail.com">saeedabdulmuizz@gmail.com</a>
+                 <div class="social-links">
+                     <a href="https://github.com/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                     </a>
+                    <a href="https://linkedin.com/in/abdulmuizz0903" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© <span id="current-year"></span> Saeed Abdul Muizz. All rights reserved.</p>
         </div>
-      </div>
-      <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="pic.jpg" alt="">
-      </div>
-    </div>
-  </div>
-  <script src="script.js"></script>
+    </footer>
+
+    <script>
+        // 1. Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+        const htmlElement = document.documentElement; // Target the <html> tag
+
+        // Apply saved theme on initial load
+        if (currentTheme) {
+            htmlElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                themeToggle.textContent = 'Dark Mode';
+            } else {
+                 themeToggle.textContent = 'Light Mode';
+             }
+        } else {
+             // Default to dark if no preference saved
+             htmlElement.setAttribute('data-theme', 'dark');
+             themeToggle.textContent = 'Light Mode';
+         }
+
+        themeToggle.addEventListener('click', () => {
+            let current = htmlElement.getAttribute('data-theme');
+            if (current === 'dark') {
+                htmlElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = 'Dark Mode';
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                 themeToggle.textContent = 'Light Mode';
+            }
+        });
+
+        // 2. Scroll Animation Functionality (Intersection Observer)
+        const sections = document.querySelectorAll('section'); // Target all sections
+        const projectCards = document.querySelectorAll('.project-card, .skill-category li, #experience ul > li, #education ul li'); // Add other elements to animate
+
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: unobserve after it's visible once
+                    // observer.unobserve(entry.target);
+                } else {
+                     // Optional: remove class if you want animation to repeat when scrolling up/down
+                     // entry.target.classList.remove('is-visible');
+                 }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+         projectCards.forEach(card => {
+            // Add a slight delay based on index for a staggered effect (optional)
+            // card.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+
+        // 3. Update Footer Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    </script>
 </body>
-
 </html>
