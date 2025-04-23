@@ -1114,7 +1114,7 @@
                   const htmlElement = document.documentElement; // Target the <html> tag
                   // Default to dark if no preference or system preference doesn't match light
                   const initialTheme = localStorage.getItem('theme') ||
-                                       (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+                                       (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light');
       
                   function applyTheme(theme) {
                       htmlElement.setAttribute('data-theme', theme);
