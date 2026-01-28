@@ -29,7 +29,7 @@
     "about": {
         "paragraphs": [
             "Hello! My name is Saeed. I enjoy tackling complex problems where <span class=\"highlight\">Mechanical Engineering</span> meets <span class=\"highlight\">Artificial Intelligence</span>. Currently, I'm a 2nd-year student at <span class=\"highlight\">NIT Srinagar</span>.",
-            "My research journey started at **Gaash Lab**, where I work on low-resource language processing, specifically trying to bring **Kashmiri** into the digital age through Neural Machine Translation (NMT).",
+            "My research journey started at <span class=\"highlight\">Gaash Lab</span>, where I work on low-resource language processing, specifically trying to bring Kashmiri into the digital age through Neural Machine Translation (NMT).",
             "When I'm not training models or solving differential equations, I'm freelancing on Fiverr (automating boring stuff with Python) or organizing tech events as a Campus Expert."
         ],
         "imagePlaceholder": "AM"
@@ -40,9 +40,8 @@
             "company": "@ Gaash Lab",
             "duration": "Jan 2024 - Present",
             "tasks": [
-                "Spearheading research in English-Kashmiri Neural Machine Translation.",
-                "Evaluated performance of IndicTrans2 and Sarvam Translate models.",
-                "Fine-tuning LLMs on 48k+ sentence pairs using PyTorch and Unsloth for optimized inference."
+                "Evaluated performance of IndicTrans2, MADLAD-400, gemma-translate, nllb and Sarvam Translate models.",
+                "Fine-tuning (LoRa and QLoRa) LLMs on 48k+ sentence pairs using PyTorch and Unsloth for optimized inference."
             ]
         },
         {
@@ -59,7 +58,7 @@
             "company": "@ Technology Club, NIT Srinagar",
             "duration": "2023 - Present",
             "tasks": [
-                "Organized CodeDay Kashmir and managed logistics for college technical fests.",
+                "Helped in organizing CodeDay Kashmir and managed logistics for college technical fests.",
                 "Mentoring juniors in Python programming and Git/GitHub basics."
             ]
         }
