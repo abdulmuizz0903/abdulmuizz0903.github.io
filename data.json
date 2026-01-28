@@ -9,7 +9,7 @@
             "Automated Bots.",
             "Communities."
         ],
-        "description": "I'm a Mechanical Engineering student at NIT Srinagar. I specialize in bridging the gap between core engineering and Deep Learning, with a focus on Kashmiri NLP.",
+        "description": "I'm a Mechanical Engineering student at NIT Srinagar. I specialize in bridging the gap between core engineering and Deep Learning, with my current focus on Kashmiri NLP.",
         "ctaText": "Check out my work"
     },
     "achievements": [
@@ -32,7 +32,7 @@
             "My research journey started at **Gaash Lab**, where I work on low-resource language processing, specifically trying to bring **Kashmiri** into the digital age through Neural Machine Translation (NMT).",
             "When I'm not training models or solving differential equations, I'm freelancing on Fiverr (automating boring stuff with Python) or organizing tech events as a Campus Expert."
         ],
-        "imagePlaceholder": "[Your Image]"
+        "imagePlaceholder": "AM"
     },
     "experience": [
         {
