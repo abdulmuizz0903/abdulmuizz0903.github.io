@@ -1,0 +1,110 @@
+{
+    "hero": {
+        "greeting": "Hi, my name is",
+        "name": "Saeed Abdul Muizz.",
+        "subHeadline": "I build",
+        "typewriterOptions": [
+            "NLP Models.",
+            "Engineering Solutions.",
+            "Automated Bots.",
+            "Communities."
+        ],
+        "description": "I'm a Mechanical Engineering student at NIT Srinagar. I specialize in bridging the gap between core engineering and Deep Learning, with a focus on Kashmiri NLP.",
+        "ctaText": "Check out my work"
+    },
+    "achievements": [
+        {
+            "title": "HackMIT 2025 Selectee",
+            "description": "Selected to attend MIT's flagship hackathon.",
+            "icon": "fas fa-trophy",
+            "highlight": true
+        },
+        {
+            "title": "GitHub Campus Expert",
+            "description": "Selected as one of many students globally to lead developer communities and promote open-source",
+            "icon": "fab fa-github",
+            "highlight": false
+        }
+    ],
+    "about": {
+        "paragraphs": [
+            "Hello! My name is Saeed. I enjoy tackling complex problems where <span class=\"highlight\">Mechanical Engineering</span> meets <span class=\"highlight\">Artificial Intelligence</span>. Currently, I'm a 2nd-year student at <span class=\"highlight\">NIT Srinagar</span>.",
+            "My research journey started at **Gaash Lab**, where I work on low-resource language processing, specifically trying to bring **Kashmiri** into the digital age through Neural Machine Translation (NMT).",
+            "When I'm not training models or solving differential equations, I'm freelancing on Fiverr (automating boring stuff with Python) or organizing tech events as a Campus Expert."
+        ],
+        "imagePlaceholder": "[Your Image]"
+    },
+    "experience": [
+        {
+            "role": "Deep Learning Research Intern",
+            "company": "@ Gaash Lab",
+            "duration": "Jan 2024 - Present",
+            "tasks": [
+                "Spearheading research in English-Kashmiri Neural Machine Translation.",
+                "Evaluated performance of IndicTrans2 and Sarvam Translate models.",
+                "Fine-tuning LLMs on 48k+ sentence pairs using PyTorch and Unsloth for optimized inference."
+            ]
+        },
+        {
+            "role": "Freelance Python Developer",
+            "company": "@ Fiverr",
+            "duration": "2023 - Present",
+            "tasks": [
+                "Completed 25+ automation and web scraping projects with a 5-star rating.",
+                "Built custom bots for data extraction and workflow automation using Selenium and BeautifulSoup."
+            ]
+        },
+        {
+            "role": "Community Lead & Organizer",
+            "company": "@ Technology Club, NIT Srinagar",
+            "duration": "2023 - Present",
+            "tasks": [
+                "Organized CodeDay Kashmir and managed logistics for college technical fests.",
+                "Mentoring juniors in Python programming and Git/GitHub basics."
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "title": "Hadith Verification Bot",
+            "description": "A Telegram bot hosted on AWS EC2 that verifies Hadith authenticity. Scrapes reliable databases using BeautifulSoup and serves results via API.",
+            "techStack": ["Python", "Telegram API", "AWS EC2", "BS4"],
+            "links": {
+                "github": "https://github.com/abdulmuizz0903/Hadith-Verification-TG-Bot",
+                "external": null
+            }
+        },
+        {
+            "title": "KashmiriNormalizer",
+            "description": "Text normalizer for kashmiri that handles data preprocessing and postprocessing to make it feasible to train ML models for Kashmiri Language.",
+            "techStack": ["Python", "Regex", "NLP"],
+            "links": {
+                "github": "https://github.com/abdulmuizz0903/KashmiriNormalizer",
+                "external": null
+            }
+        }
+    ],
+    "skills": {
+        "categories": [
+            {
+                "name": "Languages",
+                "items": ["Python (Advanced)", "C++ / C", "SQL"]
+            },
+            {
+                "name": "ML & AI",
+                "items": ["PyTorch / TensorFlow", "Hugging Face Transformers", "Unsloth (Fine-tuning)", "Scikit-learn", "NMT & NLP", "Pandas", "NumPy", "Matplotlib"]
+            },
+            {
+                "name": "Tools & Platforms",
+                "items": ["Git & GitHub", "Linux / Bash", "AWS (EC2)", "Docker"]
+            }
+        ]
+    },
+    "contact": {
+        "email": "saeedabdulmuizz@gmail.com",
+        "social": {
+            "github": "https://github.com/abdulmuizz0903",
+            "linkedin": "https://linkedin.com/in/abdulmuizz0903"
+        }
+    }
+}
