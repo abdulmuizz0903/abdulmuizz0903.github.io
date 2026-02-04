@@ -74,6 +74,15 @@
             }
         },
         {
+            "title": "Kashmiri AI Translator and TTS",
+            "description": "A specialized tool designed to translate English text into Kashmiri and generate natural sounding speech. I used GitHub Copilot and Vercel to develop and deploy the frontend whereas for backend I used Gradio's API and Hugging Face spaces. I also contributed in creating the NMT model used in the backend at Gaash Lab.",
+            "techStack": ["Python", "Gradio", "NLP", "Hugging-Face", "Next.js", "Vercel"],
+            "links": {
+                "github": "https://github.com/abdulmuizz0903/KLT_WebApp",
+                "external": "https://kashmiri-ai.vercel.app"
+            }
+        },
+        {
             "title": "KashmiriNormalizer",
             "description": "Text normalizer for kashmiri that handles data preprocessing and postprocessing to make it feasible to train ML models for Kashmiri Language.",
             "techStack": ["Python", "Regex", "NLP"],
